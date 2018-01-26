@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content = "IE-edge">
+    <title>Demo App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href= {{ url_for('static', filename="main.css")}} link type="text/css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href= {{ url_for('static', filename="main.css")}} link type="text/css" >
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <!-- Jquery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+</head>
+
+<body>
+<div class="container-fluid no-padding">
+  <div class="row">
+    <div class="col-md-12">
+    <img src= "http://www.compjour.org/files/flask-recalls/hello-great-day-nodate.png" id="slide" class="center">
+    <h1 id= "text">{% if my_string is none %}
+        <p>string is empty<p>
+        {% else %}
+        {{my_string}}
+        {% endif %}
+</h1> 
+    </div>
+  </div>
+</div>
+
+<div class="jumbotron">
+    <div class = "row"> 
+        <script>
+        setInterval(function (){
+        $(document).ready(function () {
+                        $.ajax({
+                            type:"POST",
+                            url: "/db",
+                            success: function(data){
+                                file = data.response + '.jpg'
+                                console.log(file)
+                                $('#slide').attr('src', "{{url_for('static',filename='')}}" + data.response + '.jpg')
+                                $('#text').text(data.response);
+                            }
+                        })      
+        });
+  }, 5000);//time in milliseconds
+        </script>
+        <div class="col-md-4" id="ic"></div>
+        <div class="col-md-4" id="address"></div>
+        <div class="col-md-4" id="occupants"></div>
+    </div>
+
+
+
+<style>
+    img.center {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}   
+</style>
+</div>
+</body>
+</html>
